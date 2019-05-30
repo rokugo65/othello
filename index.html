@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue Sample</title>
+  <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+  <div id="app">
+    <h1>たのしいオセロ</h1>
+    <div v-if="!gameEnd">
+      <h2 v-if="turn">黒の番です</h2>
+      <h2 v-else>白の番です</h2>
+    </div>
+    <div v-else>
+      <h2 v-if="blackStoneNum>whiteStoneNum">黒の勝ちです</h2>
+      <h2 v-else-if="blackStoneNum<whiteStoneNum">白の勝ちです</h2>
+      <h2 v-else>引き分けです</h2>
+    </div>
+    <h3>{{"黒:"+blackStoneNum}}{{"白:"+whiteStoneNum}}</h3>
+    <table class="board">
+      <tr v-for="(row,rowIndex) in board">
+        <td v-for="(col,colIndex) in row" v-if="col!=-1">
+            <div v-if="col==1" class="blackStone">黒</div>
+            <div v-else-if="col==2" class="whiteStone">白</div>
+            <div v-else-if="canPutBoard[rowIndex][colIndex]" class="blank" @click="put(rowIndex,colIndex)"></div>
+            <div v-else class="blank2"></div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+<script src="./vue.js"></script>
+<script src="./app.js"></script>
+</html>
